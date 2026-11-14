@@ -1,0 +1,27 @@
+# R / RStudio
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# renv local library (keep renv.lock tracked)
+renv/library/
+renv/staging/
+
+# Raw mortgage datasets: do not commit source data
+1_data_set/data/raw/*
+!1_data_set/data/raw/**/.gitkeep
+
+# Processed datasets and model artifacts
+1_data_set/data/processed/*
+!1_data_set/data/processed/**/.gitkeep
+*.rds
+*.RData
+*.rda
+
+# Local environment and temporary files
+.env
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
