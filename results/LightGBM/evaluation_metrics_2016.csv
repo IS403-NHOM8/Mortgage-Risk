@@ -1,0 +1,2 @@
+Model,Test_Year,Log_Loss,Brier_Score,AUC_ROC,AUC_PR,Tjur_R2
+LightGBM,2016,0.025437,0.004343,0.807683,0.017328,0.009108
