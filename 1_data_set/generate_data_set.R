@@ -10,7 +10,7 @@ PERF_CUTOFF <- 202301L
 WRITE_MASTER <- TRUE      
 CENSORING_POLICY <- 'exclude' 
 DATA_MODE <- 'PAPER_REPLICATION' 
-if(DATA_MODE != 'PAPER_REPLICATION') stop('Only PAPER_REPLICATION is implemented in B v4')
+if(DATA_MODE != 'PAPER_REPLICATION') stop('Only PAPER_REPLICATION is implemented')
 
 O_NAMES <- c('credit_score','date_first_payment','first_time_homebuyer',
              'date_maturity','MSA','insurance_percent','nr_units','occupancy',
@@ -114,7 +114,7 @@ for(col in macro_vars) set(macro,j=col,value=as_num(macro[[col]]))
 by_snapshot <- setNames(vector('list',length(SNAPSHOTS)),as.character(SNAPSHOTS))
 snapshot_audit <- list(); exceptions <- list(); exit_reason_audit <- list(); seen_ids <- character()
 for(v in VINTAGES) {
-  message('[v4] vintage ',v)
+  message('vintage ',v)
   zp <- file.path(RAW,sprintf('sample_%d.zip',v))
   if(!file.exists(zp)) fail('Missing ZIP ',zp)
   orig_member <- zip_member(zp,'orig',v)
@@ -492,7 +492,7 @@ for(y in SNAPSHOTS) {
               retrospective_macro=TRUE)
   saveRDS(list(Y=Y,X=X,ID=ID,AUX=AUX),
           file.path(OUT,sprintf('data_window_%d.rds',y)),compress='gzip')
-  message('[v4] saved cumulative ',y,' observations=',length(Y),' defaults=',sum(Y))
+  message('saved cumulative ',y,' observations=',length(Y),' defaults=',sum(Y))
   rm(all_dt,X,Y,ID);gc(verbose=FALSE)
 }
 if(length(snapshot_audit)) fwrite(rbindlist(snapshot_audit,fill=TRUE),
@@ -501,5 +501,5 @@ if(length(exit_reason_audit)) fwrite(rbindlist(exit_reason_audit,fill=TRUE),
                                      file.path(OUT,'generator_exit_reason_audit.csv'))
 exception_path <- file.path(OUT,'generator_exceptions.csv')
 if(length(exceptions)) fwrite(rbindlist(exceptions,fill=TRUE),exception_path)
-    else if(file.exists(exception_path)) unlink(exception_path)
-message('[B v4] Finished. Inspect exceptions, exit-reason counts, and split-specific preprocessing.')
+else if(file.exists(exception_path)) unlink(exception_path)
+message('Finished. Inspect exceptions, exit-reason counts, and split-specific preprocessing.')
