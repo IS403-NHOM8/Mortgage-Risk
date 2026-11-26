@@ -13,3 +13,12 @@ renv/staging/
 *.tmp
 .DS_Store
 Thumbs.db
+
+
+
+
+# Bỏ qua thư mục data tuning và training của SVC & Random Forest
+2_hyperparameter_tuning/*/data_*/
+2_hyperparameter_tuning/*/old data/
+2_hyperparameter_tuning/*/baseline_v3/
+3_training_and_prediction/*/baseline_v3/
